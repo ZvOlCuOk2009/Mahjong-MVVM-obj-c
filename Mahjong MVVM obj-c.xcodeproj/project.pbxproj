@@ -17,6 +17,8 @@
 		22E0B41A2D69038F0026ADBE /* Mahjong_MVVM_obj_cTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4192D69038F0026ADBE /* Mahjong_MVVM_obj_cTests.m */; };
 		22E0B4242D69038F0026ADBE /* Mahjong_MVVM_obj_cUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4232D69038F0026ADBE /* Mahjong_MVVM_obj_cUITests.m */; };
 		22E0B4262D69038F0026ADBE /* Mahjong_MVVM_obj_cUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4252D69038F0026ADBE /* Mahjong_MVVM_obj_cUITestsLaunchTests.m */; };
+		22E0B4342D6904F60026ADBE /* TileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4332D6904F60026ADBE /* TileModel.m */; };
+		22E0B4372D6906280026ADBE /* TileViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4362D6906280026ADBE /* TileViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		22E0B41F2D69038F0026ADBE /* Mahjong MVVM obj-cUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mahjong MVVM obj-cUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E0B4232D69038F0026ADBE /* Mahjong_MVVM_obj_cUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mahjong_MVVM_obj_cUITests.m; sourceTree = "<group>"; };
 		22E0B4252D69038F0026ADBE /* Mahjong_MVVM_obj_cUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mahjong_MVVM_obj_cUITestsLaunchTests.m; sourceTree = "<group>"; };
+		22E0B4322D6904F60026ADBE /* TileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileModel.h; sourceTree = "<group>"; };
+		22E0B4332D6904F60026ADBE /* TileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileModel.m; sourceTree = "<group>"; };
+		22E0B4352D6906280026ADBE /* TileViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileViewModel.h; sourceTree = "<group>"; };
+		22E0B4362D6906280026ADBE /* TileViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,10 @@
 				22E0B4012D69038C0026ADBE /* SceneDelegate.m */,
 				22E0B4032D69038C0026ADBE /* ViewController.h */,
 				22E0B4042D69038C0026ADBE /* ViewController.m */,
+				22E0B4352D6906280026ADBE /* TileViewModel.h */,
+				22E0B4362D6906280026ADBE /* TileViewModel.m */,
+				22E0B4322D6904F60026ADBE /* TileModel.h */,
+				22E0B4332D6904F60026ADBE /* TileModel.m */,
 				22E0B4062D69038C0026ADBE /* Main.storyboard */,
 				22E0B4092D69038F0026ADBE /* Assets.xcassets */,
 				22E0B40B2D69038F0026ADBE /* LaunchScreen.storyboard */,
@@ -266,7 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E0B4372D6906280026ADBE /* TileViewModel.m in Sources */,
 				22E0B4052D69038C0026ADBE /* ViewController.m in Sources */,
+				22E0B4342D6904F60026ADBE /* TileModel.m in Sources */,
 				22E0B3FF2D69038C0026ADBE /* AppDelegate.m in Sources */,
 				22E0B4102D69038F0026ADBE /* main.m in Sources */,
 				22E0B4022D69038C0026ADBE /* SceneDelegate.m in Sources */,
