@@ -11,6 +11,14 @@ static CGFloat widthBorder = 30;
 
 @implementation TileViewModel
 
+//- (instancetype)initWithLayout:(NSArray<TilePosition *> *)layout {
+//    self = [super init];
+//    if (self) {
+//        _tiles = layout;
+//    }
+//    return self;
+//}
+
 - (instancetype)initWithModel:(TileModel *)model {
     self = [super init];
     if (self) {
@@ -19,8 +27,6 @@ static CGFloat widthBorder = 30;
         _secondTap = -1;
         _firstRectangle = CGRectZero;
         _secondRectangle = CGRectZero;
-        _firstTile = [[UIView alloc] initWithFrame:CGRectZero];
-        _secondTile = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
@@ -30,17 +36,6 @@ static CGFloat widthBorder = 30;
 {
     UIView *tileView = [[UIView alloc] init];
     tileView.frame = CGRectMake(x, y, rect.size.width, rect.size.height);
-
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:tileView.bounds];
-    tileView.backgroundColor = [UIColor systemIndigoColor];
-    tileView.layer.cornerRadius = 20;
-    tileView.layer.shadowColor = [UIColor blackColor].CGColor;
-    tileView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    tileView.layer.shadowOpacity = 0.5f;
-    tileView.layer.shadowPath = shadowPath.CGPath;
-    tileView.layer.borderColor = [UIColor whiteColor].CGColor;
-    tileView.layer.borderWidth = 2;
-    tileView.layer.masksToBounds = NO;
     tileView.tag = [number integerValue];
 
     UILabel *label = [[UILabel alloc] init];
@@ -53,42 +48,49 @@ static CGFloat widthBorder = 30;
     return tileView;
 }
 
-- (void)logicForRemovingTiles:(UIView *)tileView touchView:(UIView *)touchView
+//- (BOOL)isTileAccessible:(TilePosition *)tile {
+//    for (TilePosition *other in self.tiles) {
+//        if (other.layer > tile.layer && other.x == tile.x && other.y == tile.y) {
+//            return NO; // Є плитка зверху
+//        }
+//        if (other.x == tile.x - 1 || other.x == tile.x + 1) {
+//            return YES; // Має хоча б одну вільну сторону
+//        }
+//    }
+//    return NO;
+//}
+
+- (void)logicForRemovingTiles:(TileData *)tileData
 {
     CGRect zeroRect = CGRectMake(0, 0, 0, 0);
     if (CGRectEqualToRect(self.firstRectangle, zeroRect)) {
-        self.firstRectangle = tileView.frame;
-    } else if (CGRectEqualToRect(self.firstRectangle, tileView.frame)) {
-        self.firstRectangle = tileView.frame;
+        self.firstRectangle = tileData.frame;
+    } else if (CGRectEqualToRect(self.firstRectangle, tileData.frame)) {
+        self.firstRectangle = tileData.frame;
         return;
     } else {
-        self.firstRectangle = tileView.frame;
+        self.firstRectangle = tileData.frame;
     }
 
-    NSString *tag = [NSString stringWithFormat:@"%li", (long)tileView.tag];
+    NSString *tag = [NSString stringWithFormat:@"%li", tileData.tag];
 
     if (self.firstTile == nil && self.secondTile == nil) {
         self.firstTap = [tag integerValue];
-        self.firstTile = tileView;
+        self.firstTile = tileData;
     } else if (self.firstTile != nil && self.firstTap != [tag integerValue]) {
         self.firstTap = [tag integerValue];
-        self.firstTile = tileView;
+        self.firstTile = tileData;
     } else if (self.firstTile != nil && self.firstTap == [tag integerValue]) {
         self.secondTap = [tag integerValue];
-        self.secondTile = tileView;
+        self.secondTile = tileData;
     }
 
     if (self.firstTap == self.secondTap) {
-        [self.firstTile removeFromSuperview];
-        [self.secondTile removeFromSuperview];
+        [self.delegate didSelectTileAtPosition:self.firstTap secongData:self.secondTap];
         self.firstRectangle = CGRectMake(0, 0, 0, 0);
         [self resetTaps];
-//        self.firstTile = nil;
-//        self.secondTile = nil;
-        touchView = nil;
     } else if (self.secondTile != nil) {
         self.firstTap = [tag integerValue];
-//        self.secondTile = nil;
         self.secondTap = 0;
     }
 }
@@ -98,6 +100,14 @@ static CGFloat widthBorder = 30;
     self.firstTap = 10000;
     self.secondTap = 10000;
 }
+
+- (void)resetGame {
+    [self.tileModel resetGame];
+    self.firstTap = -1;
+    self.secondTap = -1;
+}
+
+#pragma mark - tile placement calculation
 
 - (CGRect)calculateFrameForTile:(CGRect)frameView
 {
@@ -117,12 +127,6 @@ static CGFloat widthBorder = 30;
 - (CGFloat)retreatFromFrame
 {
     return widthBorder * 2;
-}
-
-- (void)resetGame {
-    [self.tileModel resetGame];
-    self.firstTap = -1;
-    self.secondTap = -1;
 }
 
 @end

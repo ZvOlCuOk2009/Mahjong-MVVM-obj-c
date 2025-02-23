@@ -18,21 +18,12 @@ NSMutableArray<NSNumber *> *_subNumbers;
     if (self) {
         _randomNumbers = [NSMutableArray new];
         _subNumbers = [NSMutableArray new];
-//        _staticNumber = 10;
         _widthBorder = 30;
     }
     return self;
 }
 
 - (void)generateRandomNumbers {
-//    for (int i = 0; i < self.staticNumber; i++) {
-//        NSNumber *number = @(arc4random_uniform(self.staticNumber));
-//        if (![self.randomNumbers containsObject:number] && ![self.subNumbers containsObject:number]) {
-//            [self.randomNumbers addObject:number];
-//        }
-//    }
-//    [self.randomNumbers addObjectsFromArray:self.subNumbers];
-    
     for (int i = 0; i < staticNumber; i++) {
         NSNumber *number = [NSNumber numberWithInteger:(arc4random_uniform(staticNumber))];
         if ([self.randomNumbers containsObject:number]) {
@@ -52,9 +43,9 @@ NSMutableArray<NSNumber *> *_subNumbers;
     }
 }
 
-- (BOOL)isTileMatchFirstTile:(NSInteger)firstTap secondTile:(NSInteger)secondTap {
-    return firstTap == secondTap;
-}
+//- (BOOL)isTileMatchFirstTile:(NSInteger)firstTap secondTile:(NSInteger)secondTap {
+//    return firstTap == secondTap;
+//}
 
 - (void)resetGame {
     [self.randomNumbers removeAllObjects];

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2276515B2D69E58A00CA485A /* TilePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2276515A2D69E58A00CA485A /* TilePosition.m */; };
+		2276515F2D69E5FB00CA485A /* TileLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2276515E2D69E5FB00CA485A /* TileLayout.m */; };
+		227651652D6A977700CA485A /* TileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 227651642D6A977700CA485A /* TileData.m */; };
 		22E0B3FF2D69038C0026ADBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B3FE2D69038C0026ADBE /* AppDelegate.m */; };
 		22E0B4022D69038C0026ADBE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4012D69038C0026ADBE /* SceneDelegate.m */; };
 		22E0B4052D69038C0026ADBE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0B4042D69038C0026ADBE /* ViewController.m */; };
@@ -39,6 +42,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		227651592D69E58A00CA485A /* TilePosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TilePosition.h; sourceTree = "<group>"; };
+		2276515A2D69E58A00CA485A /* TilePosition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TilePosition.m; sourceTree = "<group>"; };
+		2276515D2D69E5FB00CA485A /* TileLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileLayout.h; sourceTree = "<group>"; };
+		2276515E2D69E5FB00CA485A /* TileLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileLayout.m; sourceTree = "<group>"; };
+		227651632D6A977700CA485A /* TileData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileData.h; sourceTree = "<group>"; };
+		227651642D6A977700CA485A /* TileData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileData.m; sourceTree = "<group>"; };
 		22E0B3FA2D69038C0026ADBE /* Mahjong MVVM obj-c.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mahjong MVVM obj-c.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E0B3FD2D69038C0026ADBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22E0B3FE2D69038C0026ADBE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -87,6 +96,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2276515C2D69E5A000CA485A /* Zero level  */ = {
+			isa = PBXGroup;
+			children = (
+				22E0B4352D6906280026ADBE /* TileViewModel.h */,
+				22E0B4362D6906280026ADBE /* TileViewModel.m */,
+				22E0B4322D6904F60026ADBE /* TileModel.h */,
+				22E0B4332D6904F60026ADBE /* TileModel.m */,
+				227651632D6A977700CA485A /* TileData.h */,
+				227651642D6A977700CA485A /* TileData.m */,
+			);
+			path = "Zero level ";
+			sourceTree = "<group>";
+		};
 		22E0B3F12D69038C0026ADBE = {
 			isa = PBXGroup;
 			children = (
@@ -116,10 +138,11 @@
 				22E0B4012D69038C0026ADBE /* SceneDelegate.m */,
 				22E0B4032D69038C0026ADBE /* ViewController.h */,
 				22E0B4042D69038C0026ADBE /* ViewController.m */,
-				22E0B4352D6906280026ADBE /* TileViewModel.h */,
-				22E0B4362D6906280026ADBE /* TileViewModel.m */,
-				22E0B4322D6904F60026ADBE /* TileModel.h */,
-				22E0B4332D6904F60026ADBE /* TileModel.m */,
+				2276515D2D69E5FB00CA485A /* TileLayout.h */,
+				2276515E2D69E5FB00CA485A /* TileLayout.m */,
+				227651592D69E58A00CA485A /* TilePosition.h */,
+				2276515A2D69E58A00CA485A /* TilePosition.m */,
+				2276515C2D69E5A000CA485A /* Zero level  */,
 				22E0B4062D69038C0026ADBE /* Main.storyboard */,
 				22E0B4092D69038F0026ADBE /* Assets.xcassets */,
 				22E0B40B2D69038F0026ADBE /* LaunchScreen.storyboard */,
@@ -276,9 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2276515B2D69E58A00CA485A /* TilePosition.m in Sources */,
 				22E0B4372D6906280026ADBE /* TileViewModel.m in Sources */,
 				22E0B4052D69038C0026ADBE /* ViewController.m in Sources */,
+				2276515F2D69E5FB00CA485A /* TileLayout.m in Sources */,
 				22E0B4342D6904F60026ADBE /* TileModel.m in Sources */,
+				227651652D6A977700CA485A /* TileData.m in Sources */,
 				22E0B3FF2D69038C0026ADBE /* AppDelegate.m in Sources */,
 				22E0B4102D69038F0026ADBE /* main.m in Sources */,
 				22E0B4022D69038C0026ADBE /* SceneDelegate.m in Sources */,

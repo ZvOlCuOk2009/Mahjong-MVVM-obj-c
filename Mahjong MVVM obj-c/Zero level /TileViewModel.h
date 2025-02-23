@@ -8,28 +8,45 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "TileModel.h"
+#import "TilePosition.h"
+#import "TileData.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol TileViewModelDelegate <NSObject>
+
+- (void)didSelectTileAtPosition:(NSInteger)firstTag secongData:(NSInteger)secondTag;
+
+@end
 
 @interface TileViewModel : NSObject
 
 @property (nonatomic, strong) TileModel *tileModel;
 
-@property (nonatomic, strong) UIView *firstTile;
-@property (nonatomic, strong) UIView *secondTile;
+@property (nonatomic, weak) id<TileViewModelDelegate> delegate;
+
+//@property (nonatomic, strong) UIView *firstTile;
+//@property (nonatomic, strong) UIView *secondTile;
+
+@property (nonatomic, strong) TileData *firstTile;
+@property (nonatomic, strong) TileData *secondTile;
 
 @property (nonatomic, assign) NSInteger firstTap;
 @property (nonatomic, assign) NSInteger secondTap;
 
-
 @property (nonatomic, assign) CGRect firstRectangle;
 @property (nonatomic, assign) CGRect secondRectangle;
 
+@property (nonatomic, strong) NSArray<TilePosition *> *tiles;
+
+- (void)logicForRemovingTiles:(TileData *)tileData;
+
+//- (instancetype)initWithLayout:(NSArray<TilePosition *> *)layout;
+//- (BOOL)isTileAccessible:(TilePosition *)tile;
 - (instancetype)initWithModel:(TileModel *)model;
 - (UIView *)createTileViewWithNumber:(NSNumber *)number rect:(CGRect)rect
                                withX:(CGFloat)x withY:(CGFloat)y;
 - (CGRect)calculateFrameForTile:(CGRect)frameView;
-- (void)logicForRemovingTiles:(UIView *)tileView touchView:(UIView *)touchView;
 - (void)resetGame;
 
 @end
