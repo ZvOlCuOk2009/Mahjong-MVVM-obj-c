@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TileLayout : NSObject
 
-+ (NSArray<TilePosition *> *)generatePyramidLayout;
-+ (NSArray<TilePosition *> *)generateTowerLayout;
+- (NSArray<TilePosition *> *)generateCircleLayout;
+//+ (NSArray<TilePosition *> *)generatePyramidLayout;
+//+ (NSArray<TilePosition *> *)generateTowerLayout;
 
 @end
 

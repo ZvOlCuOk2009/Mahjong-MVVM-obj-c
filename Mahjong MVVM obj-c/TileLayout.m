@@ -27,6 +27,28 @@
     return positions;
 }
 
+- (NSArray<TilePosition *> *)generateCircleLayout
+{
+    return @[
+        [[TilePosition alloc] initWithX:122.5 y:30 layer:0],
+        [[TilePosition alloc] initWithX:215 y:30 layer:0],
+        [[TilePosition alloc] initWithX:30 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:215 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:30 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:215 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:30 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:215 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:727.6 layer:0],
+        [[TilePosition alloc] initWithX:215 y:727.6 layer:0],
+    ];
+}
+
 //+ (NSArray<TilePosition *> *)generatePyramidLayout {
 //    return @[
 //        [[TilePosition alloc] initWithX:2 y:0 layer:0],

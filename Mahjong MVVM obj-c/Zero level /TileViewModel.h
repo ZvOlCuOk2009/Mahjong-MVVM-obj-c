@@ -10,6 +10,7 @@
 #import "TileModel.h"
 #import "TilePosition.h"
 #import "TileData.h"
+#import "TileLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TileViewModel : NSObject
 
 @property (nonatomic, strong) TileModel *tileModel;
+@property (nonatomic, strong) TileLayout *tileModeLayout;
 
 @property (nonatomic, weak) id<TileViewModelDelegate> delegate;
 
@@ -44,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 //- (instancetype)initWithLayout:(NSArray<TilePosition *> *)layout;
 //- (BOOL)isTileAccessible:(TilePosition *)tile;
 - (instancetype)initWithModel:(TileModel *)model;
+//- (instancetype)initWithModel:(TileLayout *)modelLayout;
+- (NSArray<TilePosition *> *)generateCircleLayout;
+- (NSArray<TilePosition *> *)generateFanLayout;
+- (NSArray<TilePosition *> *)generateMahjongLayout;
 - (UIView *)createTileViewWithNumber:(NSNumber *)number rect:(CGRect)rect
                                withX:(CGFloat)x withY:(CGFloat)y;
 - (CGRect)calculateFrameForTile:(CGRect)frameView;

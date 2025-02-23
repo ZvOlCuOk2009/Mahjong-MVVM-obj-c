@@ -10,6 +10,7 @@
 #import "TileLayout.h"
 
 //static CGFloat widthBorder = 30;
+static CGRect rectTile;
 
 @interface ViewController () <TileViewModelDelegate>
 
@@ -26,8 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self setupTiles];
+    rectTile = CGRectMake(0, 0, 92.5, 174.4);
     TileModel *model = [[TileModel alloc] init];
+//    TileLayout *modelLayout = [[TileLayout alloc] init];
     self.viewModel = [[TileViewModel alloc] initWithModel:model];
+//    self.viewModel = [[TileViewModel alloc] initWithModel:modelLayout];
     self.tiles = [NSMutableArray new];
     self.viewModel.delegate = self;
 
@@ -35,52 +39,36 @@
     [self addTilesToScene];
 }
 
-//- (void)setupTiles {
-//    NSArray<TilePosition *> *arr = [TileLayout generateTowerLayout];
-//    self.viewModel = [[TileViewModel alloc] initWithLayout:arr];
-//    for (TilePosition *position in self.viewModel.tiles) {
-//        UIView *tileView = [[UIView alloc] initWithFrame:CGRectMake(position.x * 50, position.y * 50, 50, 50)];
-////        if (position.layer == 0) {
-////                tileView.backgroundColor = [UIColor systemBlueColor];
-////            } else if (position.layer == 1) {
-////                tileView.backgroundColor = [UIColor systemRedColor];  // Наприклад, червоний колір для layer == 1
-////            }
-//        switch (position.layer) {
-//            case 0:
-//                tileView.backgroundColor = [UIColor systemBlueColor];
-//            case 1:
-//                tileView.backgroundColor = [UIColor systemRedColor];
-//            case 2:
-//                tileView.backgroundColor = [UIColor systemYellowColor];
-//            case 3:
-//                tileView.backgroundColor = [UIColor systemGreenColor];
-//            case 4:
-//                tileView.backgroundColor = [UIColor systemBrownColor];
-//            case 5:
-//                tileView.backgroundColor = [UIColor systemGrayColor];
-//            default:
-//                break;
-//        }
-//
-//        [self.view addSubview:tileView];
-//    }
-//}
-
-
 - (void)addTilesToScene {
-    CGRect rectView = [self.viewModel calculateFrameForTile:self.view.frame];
-    CGFloat x = 0.0;
-    CGFloat y = 0.0;
-
+//    CGRect rectView = [self.viewModel calculateFrameForTile:self.view.frame];
+//    CGRect rectView = CGRectMake(0, 0, 92.5, 174.4);
+//    CGFloat x = 0.0;
+//    CGFloat y = 0.0;
+    
+//    NSMutableArray <TileLayout *> *tilesLayout = self.viewModel.tileModeLayout;
+    
+//    TileLayout *layoutArray = self.viewModel.tileModeLayout;
+//    NSMutableArray<TileLayout *> *tilesLayout = [NSMutableArray arrayWithObject:layoutArray];
+    
+    NSArray<TilePosition *> *tilePositions = [self.viewModel generateMahjongLayout];
+    
     for (int i = 0; i < self.viewModel.tileModel.randomNumbers.count; i++) {
-        if ((i % 4) == 0) { x = rectView.origin.x; }
-        else { x = x + rectView.size.width; }
-        if (i < 4) { y = rectView.origin.y; }
-        else if ((i % 4) == 0) { y = y + rectView.size.height; }
+//        if ((i % 4) == 0) { x = rectView.origin.x; }
+//        else { x = x + rectView.size.width; }
+//        if (i < 4) { y = rectView.origin.y; }
+//        else if ((i % 4) == 0) { y = y + rectView.size.height; }
 
+//        UIView *tileView = [self.viewModel createTileViewWithNumber:[self.viewModel.tileModel.randomNumbers objectAtIndex:i]
+//                                                               rect:rectView
+//                                                              withX:x withY:y];
+        
+        TilePosition *tilePosition = [tilePositions objectAtIndex:i];
+        
         UIView *tileView = [self.viewModel createTileViewWithNumber:[self.viewModel.tileModel.randomNumbers objectAtIndex:i]
-                                                               rect:rectView
-                                                              withX:x withY:y];
+                                                               rect:rectTile
+                                                              withX:tilePosition.x
+                                                              withY:tilePosition.y];
+        
         [self configTileView:tileView];
         [self.tiles addObject:tileView];
         
@@ -120,12 +108,10 @@
     tileView.layer.masksToBounds = NO;
 }
 
-#pragma mark delegate
+#pragma mark - delegate
 
 - (void)didSelectTileAtPosition:(NSInteger)firstTag secongData:(NSInteger)secondTag
-{
-    [self.touchView removeFromSuperview];
-    
+{    
     NSMutableArray *tilesToRemove = [NSMutableArray array];
     
     for (UIView *tile in self.tiles) {

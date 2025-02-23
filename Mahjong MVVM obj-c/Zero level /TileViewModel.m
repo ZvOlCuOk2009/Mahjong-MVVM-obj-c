@@ -7,6 +7,7 @@
 
 #import "TileViewModel.h"
 
+
 static CGFloat widthBorder = 30;
 
 @implementation TileViewModel
@@ -20,6 +21,7 @@ static CGFloat widthBorder = 30;
 //}
 
 - (instancetype)initWithModel:(TileModel *)model {
+    
     self = [super init];
     if (self) {
         _tileModel = model;
@@ -93,6 +95,119 @@ static CGFloat widthBorder = 30;
         self.firstTap = [tag integerValue];
         self.secondTap = 0;
     }
+}
+
+- (NSArray<TilePosition *> *)generateCircleLayout {
+    NSMutableArray<TilePosition *> *positions = [NSMutableArray array];
+    
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGFloat width = CGRectGetWidth(screenBounds);
+    CGFloat height = CGRectGetHeight(screenBounds);
+    CGFloat padding = 30.0;
+    CGFloat tileSize = 92.0; // Припустимо, що розмір плитки 85 пікселів
+    
+    CGFloat centerX = width / 2;
+    CGFloat centerY = height / 2;
+    CGFloat radius = MIN(width, height) / 3; // Радіус кола
+    
+    NSInteger numberOfTiles = 16;
+    for (NSInteger i = 0; i < numberOfTiles; i++) {
+        CGFloat angle = (2 * M_PI / numberOfTiles) * i;
+        CGFloat x = centerX + radius * cos(angle) - tileSize / 2;
+        CGFloat y = centerY + radius * sin(angle) - tileSize / 2;
+        
+        if (x < padding) x = padding;
+        if (y < padding) y = padding;
+        if (x + tileSize > width - padding) x = width - tileSize - padding;
+        if (y + tileSize > height - padding) y = height - tileSize - padding;
+        
+        TilePosition *tile = [[TilePosition alloc] initWithX:x y:y layer:0];
+        [positions addObject:tile];
+    }
+    return positions;
+}
+
+- (NSArray<TilePosition *> *)generateMahjongLayout {
+    NSMutableArray<TilePosition *> *positions = [NSMutableArray array];
+        
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGFloat width = CGRectGetWidth(screenBounds);
+    CGFloat height = CGRectGetHeight(screenBounds);
+    CGFloat padding = 30.0;
+    CGFloat tileSize = 85.0;
+        
+    CGFloat centerX = width / 2;
+    CGFloat centerY = height / 2;
+        
+    NSArray<NSArray<NSNumber *> *> *layout = @[
+    @[@(0), @(1), @(1), @(1), @(0)],
+    @[@(1), @(2), @(2), @(2), @(1)],
+    @[@(1), @(2), @(3), @(2), @(1)],
+    @[@(1), @(2), @(2), @(2), @(1)],
+    @[@(0), @(1), @(1), @(1), @(0)]];
+        
+//    CGFloat startX = centerX - (tileSize * 2);
+//    CGFloat startY = centerY - (tileSize * 2);
+    CGFloat startX = centerX - (tileSize * 2) - padding;
+    CGFloat startY = centerY - (tileSize * 2) - padding;
+
+        
+    for (NSInteger row = 0; row < layout.count; row++) {
+        for (NSInteger col = 0; col < layout[row].count; col++) {
+            NSInteger layer = [layout[row][col] integerValue];
+            if (layer > 0) {
+                CGFloat x = startX + col * tileSize;
+                CGFloat y = startY + row * tileSize;
+                TilePosition *tile = [[TilePosition alloc] initWithX:x y:y layer:layer - 1];
+                [positions addObject:tile];
+            }
+        }
+    }
+    return positions;
+}
+
+//- (NSArray<TilePosition *> *)generateCircleLayout
+//{
+//    return @[
+//        [[TilePosition alloc] initWithX:122.5 y:30 layer:0],
+//        [[TilePosition alloc] initWithX:215 y:30 layer:0],
+//        [[TilePosition alloc] initWithX:30 y:204.4 layer:0],
+//        [[TilePosition alloc] initWithX:122.5 y:204.4 layer:0],
+//        [[TilePosition alloc] initWithX:215 y:204.4 layer:0],
+//        [[TilePosition alloc] initWithX:307.5 y:204.4 layer:0],
+//        [[TilePosition alloc] initWithX:30 y:378.8 layer:0],
+//        [[TilePosition alloc] initWithX:122.5 y:378.8 layer:0],
+//        [[TilePosition alloc] initWithX:215 y:378.8 layer:0],
+//        [[TilePosition alloc] initWithX:307.5 y:378.8 layer:0],
+//        [[TilePosition alloc] initWithX:30 y:553.2 layer:0],
+//        [[TilePosition alloc] initWithX:122.5 y:553.2 layer:0],
+//        [[TilePosition alloc] initWithX:215 y:553.2 layer:0],
+//        [[TilePosition alloc] initWithX:307.5 y:553.2 layer:0],
+//        [[TilePosition alloc] initWithX:122.5 y:727.6 layer:0],
+//        [[TilePosition alloc] initWithX:215 y:727.6 layer:0],
+//    ];
+//}
+
+- (NSArray<TilePosition *> *)generateFanLayout
+{
+    return @[
+        [[TilePosition alloc] initWithX:30 y:30 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:30 layer:0],
+        [[TilePosition alloc] initWithX:30 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:215 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:204.4 layer:0],
+        [[TilePosition alloc] initWithX:30 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:215 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:378.8 layer:0],
+        [[TilePosition alloc] initWithX:30 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:122.5 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:215 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:553.2 layer:0],
+        [[TilePosition alloc] initWithX:30 y:727.6 layer:0],
+        [[TilePosition alloc] initWithX:307.5 y:727.6 layer:0],
+    ];
 }
 
 - (void)resetTaps

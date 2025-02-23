@@ -9,7 +9,7 @@
 
 @implementation TilePosition
 
-- (instancetype)initWithX:(NSInteger)x y:(NSInteger)y layer:(NSInteger)layer {
+- (instancetype)initWithX:(CGFloat)x y:(CGFloat)y layer:(NSInteger)layer {
     self = [super init];
     if (self) {
         _x = x;
