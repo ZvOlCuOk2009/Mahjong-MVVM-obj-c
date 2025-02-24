@@ -16,7 +16,6 @@ static CGRect rectTile;
 
 @property (nonatomic, strong) TileViewModel *viewModel;
 @property (nonatomic, strong) NSMutableArray <UIView *> *tiles;
-@property (strong, nonatomic) UIView *touchView;
 
 - (IBAction)testButton:(id)sender;
 
@@ -29,12 +28,9 @@ static CGRect rectTile;
 //    [self setupTiles];
     rectTile = CGRectMake(0, 0, 92.5, 174.4);
     TileModel *model = [[TileModel alloc] init];
-//    TileLayout *modelLayout = [[TileLayout alloc] init];
     self.viewModel = [[TileViewModel alloc] initWithModel:model];
-//    self.viewModel = [[TileViewModel alloc] initWithModel:modelLayout];
     self.tiles = [NSMutableArray new];
     self.viewModel.delegate = self;
-
     [self.viewModel.tileModel generateRandomNumbers];
     [self addTilesToScene];
 }
@@ -44,11 +40,6 @@ static CGRect rectTile;
 //    CGRect rectView = CGRectMake(0, 0, 92.5, 174.4);
 //    CGFloat x = 0.0;
 //    CGFloat y = 0.0;
-    
-//    NSMutableArray <TileLayout *> *tilesLayout = self.viewModel.tileModeLayout;
-    
-//    TileLayout *layoutArray = self.viewModel.tileModeLayout;
-//    NSMutableArray<TileLayout *> *tilesLayout = [NSMutableArray arrayWithObject:layoutArray];
     
     NSArray<TilePosition *> *tilePositions = [self.viewModel generateMahjongLayout];
     
@@ -80,18 +71,14 @@ static CGRect rectTile;
 
 - (void)tapGestureTap:(UITapGestureRecognizer *)gestureTap {
     UIView *tileView = gestureTap.view;
-    self.touchView = tileView;
     tileView.backgroundColor = [UIColor grayColor];
-    [self performSelector:@selector(returnColor)
-               withObject:nil
-               afterDelay:0.1];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        tileView.backgroundColor = [UIColor systemIndigoColor];
+            });
     
     TileData *tileData = [[TileData alloc] initWithTag:tileView.tag frame:tileView.frame];
     [self.viewModel logicForRemovingTiles:tileData];
-}
-
-- (void)returnColor {
-    self.touchView.backgroundColor = [UIColor systemIndigoColor];
 }
 
 - (void)configTileView:(UIView *)tileView
@@ -125,6 +112,8 @@ static CGRect rectTile;
         [self.tiles removeObject:tile];
     }
 }
+
+#pragma mark - action
 
 - (IBAction)testButton:(id)sender {
     [self.viewModel resetGame];

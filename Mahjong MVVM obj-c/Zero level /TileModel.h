@@ -13,11 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TileModel : NSObject
 
 @property (nonatomic, strong) NSMutableArray<NSNumber *> *randomNumbers;
-@property (nonatomic, assign) CGFloat widthBorder;
+//@property (nonatomic, assign) CGFloat widthBorder;
 
 - (instancetype)init;
 - (void)generateRandomNumbers;
-//- (BOOL)isTileMatchFirstTile:(NSInteger)firstTap secondTile:(NSInteger)secondTap;
 - (void)resetGame;
 
 @end

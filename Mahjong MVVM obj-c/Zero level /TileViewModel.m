@@ -7,7 +7,6 @@
 
 #import "TileViewModel.h"
 
-
 static CGFloat widthBorder = 30;
 
 @implementation TileViewModel
@@ -49,18 +48,6 @@ static CGFloat widthBorder = 30;
     label.text = [number stringValue];;
     return tileView;
 }
-
-//- (BOOL)isTileAccessible:(TilePosition *)tile {
-//    for (TilePosition *other in self.tiles) {
-//        if (other.layer > tile.layer && other.x == tile.x && other.y == tile.y) {
-//            return NO; // Є плитка зверху
-//        }
-//        if (other.x == tile.x - 1 || other.x == tile.x + 1) {
-//            return YES; // Має хоча б одну вільну сторону
-//        }
-//    }
-//    return NO;
-//}
 
 - (void)logicForRemovingTiles:(TileData *)tileData
 {
@@ -145,12 +132,9 @@ static CGFloat widthBorder = 30;
     @[@(1), @(2), @(3), @(2), @(1)],
     @[@(1), @(2), @(2), @(2), @(1)],
     @[@(0), @(1), @(1), @(1), @(0)]];
-        
-//    CGFloat startX = centerX - (tileSize * 2);
-//    CGFloat startY = centerY - (tileSize * 2);
+
     CGFloat startX = centerX - (tileSize * 2) - padding;
     CGFloat startY = centerY - (tileSize * 2) - padding;
-
         
     for (NSInteger row = 0; row < layout.count; row++) {
         for (NSInteger col = 0; col < layout[row].count; col++) {
@@ -158,12 +142,28 @@ static CGFloat widthBorder = 30;
             if (layer > 0) {
                 CGFloat x = startX + col * tileSize;
                 CGFloat y = startY + row * tileSize;
+                
+                BOOL isBlocked = [self isTileBlockedAtRow:row col:col layout:layout];
                 TilePosition *tile = [[TilePosition alloc] initWithX:x y:y layer:layer - 1];
+                            tile.isBlocked = isBlocked; // Додаємо властивість `isBlocked`
                 [positions addObject:tile];
             }
         }
     }
     return positions;
+}
+
+- (BOOL)isTileBlockedAtRow:(NSInteger)row col:(NSInteger)col
+                    layout:(NSArray<NSArray<NSNumber *> *> *)layout {
+    NSInteger rowCount = layout.count;
+    NSInteger colCount = layout.firstObject.count;
+
+    // Перевіряємо чи є сусіди зліва, справа та зверху
+    BOOL hasLeft = (col > 0) && ([layout[row][col - 1] integerValue] > 0);
+    BOOL hasRight = (col < colCount - 1) && ([layout[row][col + 1] integerValue] > 0);
+    BOOL hasTop = (row > 0) && ([layout[row - 1][col] integerValue] > 0);
+    BOOL hasBottom = (row < rowCount - 1) && ([layout[row + 1][col] integerValue] > 0);
+    return hasLeft && hasRight && hasTop && hasBottom;
 }
 
 //- (NSArray<TilePosition *> *)generateCircleLayout

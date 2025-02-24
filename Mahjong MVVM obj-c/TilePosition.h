@@ -13,8 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger x;
 @property (nonatomic, assign) NSInteger y;
+@property (nonatomic, assign) NSInteger tag;
 @property (nonatomic, assign) NSInteger layer; // Висота (3D)
-@property (nonatomic, assign, getter=isBlocked) BOOL blocked;
+//@property (nonatomic, assign) CGRect frame;
+@property (nonatomic, assign) BOOL isBlocked;
 
 - (instancetype)initWithX:(CGFloat)x y:(CGFloat)y layer:(NSInteger)layer;
 

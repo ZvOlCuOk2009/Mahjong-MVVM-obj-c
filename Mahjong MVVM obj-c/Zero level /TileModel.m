@@ -18,7 +18,7 @@ NSMutableArray<NSNumber *> *_subNumbers;
     if (self) {
         _randomNumbers = [NSMutableArray new];
         _subNumbers = [NSMutableArray new];
-        _widthBorder = 30;
+//        _widthBorder = 30;
     }
     return self;
 }
@@ -42,10 +42,6 @@ NSMutableArray<NSNumber *> *_subNumbers;
         }
     }
 }
-
-//- (BOOL)isTileMatchFirstTile:(NSInteger)firstTap secondTile:(NSInteger)secondTap {
-//    return firstTap == secondTap;
-//}
 
 - (void)resetGame {
     [self.randomNumbers removeAllObjects];

@@ -15,7 +15,7 @@
         _x = x;
         _y = y;
         _layer = layer;
-        _blocked = NO;
+        _isBlocked = NO;
     }
     return self;
 }

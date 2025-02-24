@@ -44,7 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)logicForRemovingTiles:(TileData *)tileData;
 
 //- (instancetype)initWithLayout:(NSArray<TilePosition *> *)layout;
-//- (BOOL)isTileAccessible:(TilePosition *)tile;
 - (instancetype)initWithModel:(TileModel *)model;
 //- (instancetype)initWithModel:(TileLayout *)modelLayout;
 - (NSArray<TilePosition *> *)generateCircleLayout;
